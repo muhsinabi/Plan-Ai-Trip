@@ -1,0 +1,390 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Business Travel Itinerary Planner</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/planner.css' %}">
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div class="brand-section">
+
+        <div class="airplane-logo">✈</div>
+
+        <div>
+            <h1>Business Travel Itinerary Planner</h1>
+            <p>Plan Smarter. Meet Together. Travel Better.</p>
+        </div>
+
+    </div>
+
+    <div class="header-controls">
+
+        <div class="header-control">
+            📅 <span id="current-date"></span>
+        </div>
+
+        <div class="header-control">
+            🌐 EN
+        </div>
+
+        <div class="header-control user-control">
+            <span class="user-circle">U</span>
+            User
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="page-container">
+
+    <section class="planner-section">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+
+                <span class="section-number">1</span>
+
+                <div>
+                    <h2>Participants & Meetings Input</h2>
+
+                    <p>
+                        Enter participants and their business meetings
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="slogan">
+                From Meetings to Success ✈
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table id="participants-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th rowspan="2">#</th>
+
+                        <th rowspan="2">
+                            Participant<br>Name
+                        </th>
+
+                        <th rowspan="2">
+                            Department<br>(optional)
+                        </th>
+
+                        <th rowspan="2">
+                            Current Location<br>
+                            (Departure from)
+                        </th>
+
+                        
+
+                        <th colspan="4" class="meeting-header meeting-one">
+                            📅 Meeting Location 1
+                        </th>
+
+                        <th colspan="4" class="meeting-header meeting-two">
+                            📅 Meeting Location 2
+                        </th>
+
+                        <th colspan="4" class="meeting-header meeting-three">
+                            📅 Meeting Location 3 (Optional)
+                        </th>
+
+                        <th rowspan="2">
+                            Actions
+                        </th>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Sleepover?</th>
+
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Sleepover?</th>
+
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Sleepover?</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="participants-body">
+
+                    <!-- Participants will be added here by JavaScript -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="input-actions">
+
+            <button
+                type="button"
+                id="add-participant"
+                class="btn btn-primary">
+
+                ＋ Add Participant
+
+            </button>
+            <button
+                 type="button"
+                 id="add-meeting"
+                 class="btn btn-primary">
+
+                 ＋ Add Meeting
+
+            </button>
+
+
+            <div class="right-actions">
+
+                <button
+                    type="button"
+                    id="clear-all"
+                    class="btn btn-secondary">
+
+                    🗑 Clear All
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="generate-itinerary"
+                    class="btn btn-success">
+
+                    ⚙ Generate Itinerary
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="planner-section itinerary-section">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+
+                <span class="section-number">2</span>
+
+                <div>
+
+                    <h2>Generated Itinerary</h2>
+
+                    <p>
+                        Detailed travel plan with flights,
+                        hotels, local transport and maps.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="export-buttons">
+
+                <button
+                    type="button"
+                    id="download-excel"
+                    class="btn btn-excel">
+
+                    📊 Download Excel
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="download-pdf"
+                    class="btn btn-pdf">
+
+                    📄 Download PDF
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="share-itinerary"
+                    class="btn btn-share">
+
+                    ↗ Share
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div id="participant-tabs"
+             class="participant-tabs">
+        </div>
+
+
+        <div id="generated-itinerary">
+
+            <div class="empty-itinerary">
+
+                <div class="empty-icon">✈</div>
+
+                <h3>Your itinerary will appear here</h3>
+
+                <p>
+                    Enter participant and meeting information above,
+                    then click <strong>Generate Itinerary</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="bottom-panels">
+
+            <div class="info-panel">
+
+                <div class="panel-icon">👥</div>
+
+                <div>
+
+                    <h3>Common Meetings</h3>
+
+                    <div id="common-meetings">
+
+                        <p class="muted">
+                            Common meetings will appear here after
+                            generating the itinerary.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-panel">
+
+                <div class="panel-icon">🔗</div>
+
+                <div>
+
+                    <h3>Helpful Links</h3>
+
+                    <div class="helpful-links">
+
+                        <a
+                            href="https://www.google.com/maps"
+                            target="_blank">
+
+                            🗺️ Google Maps
+
+                        </a>
+
+                        <a href="#" id="flight-search-link">
+
+                            ✈️ Flight Search
+
+                        </a>
+
+                        <a href="#" id="hotel-search-link">
+
+                            🏨 Hotel Search
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-panel">
+
+                <div class="panel-icon">📊</div>
+
+                <div>
+
+                    <h3>Trip Summary</h3>
+
+                    <ul id="trip-summary">
+
+                        <li>
+                            Total Flights:
+                            <strong>0</strong>
+                        </li>
+
+                        <li>
+                            Total Hotel Nights:
+                            <strong>0</strong>
+                        </li>
+
+                        <li>
+                            Meetings:
+                            <strong>0</strong>
+                        </li>
+
+                        <li>
+                            Estimated Cost:
+                            <strong>Not calculated</strong>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="{% static 'js/planner.js' %}?v=3"></script>
+
+</body>
+</html>
